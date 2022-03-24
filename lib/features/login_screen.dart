@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> goToHome() async {
     setState(() => loading = true);
     animate(animations[1]);
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     setState(() => loading = false);
     Navigator.pushNamed(context, '/home');
   }
@@ -122,7 +122,11 @@ class _LoginScreenState extends State<LoginScreen> {
         hint: 'Senha',
         hide: true,
         onChanged: (String v) {
-          animate(animations[3]);
+          if (v.isEmpty) {
+            animate(animations[4]);
+          } else {
+            animate(animations[3]);
+          }
         },
       )
     ]),
@@ -137,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            'Animar',
+            'Entrar',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,

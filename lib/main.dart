@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animations/features/home_screen.dart';
-import 'package:flutter_animations/features/login_screen.dart';
-import 'package:flutter_animations/features/splash_screen.dart';
+
+import 'features/home_screen.dart';
+import 'features/login_screen.dart';
+import 'features/splash_screen.dart';
+import 'features/detail_screen.dart';
 
 void main() {
   runApp(const FlutterAnimations());
@@ -21,6 +23,7 @@ class FlutterAnimations extends StatelessWidget {
       routes: {
         '/login': (BuildContext context) => const LoginScreen(),
         '/home': (BuildContext context) => const HomeScreen(),
+        '/detail': (BuildContext context) => const DetailScreen(),
       },
     );
   }
