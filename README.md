@@ -1,4 +1,4 @@
-### Learning flutter animations.
+### Learning flutter animations
 
 Login          |  Some animations
 :-------------------------:|:-------------------------:
