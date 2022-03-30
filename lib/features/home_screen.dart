@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animations/widgets/rotate_transition.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({ Key? key }) : super(key: key);
@@ -10,6 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  late Timer timer;
   bool animationIn = false;
 
   late final AnimationController controller = AnimationController(
@@ -32,7 +34,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         animationIn = !animationIn;
       });
@@ -43,6 +45,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+    timer.cancel();
     controller.dispose();
     super.dispose();
   }
@@ -68,6 +71,8 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             animatedRotation(),
             animatedOpacity(),
             title('Controlled animations'),
+            animatedBuilder(),
+            animatedWidget(),
             scaleTransition(),
             slideTransition(),
             title('Hero'),
@@ -133,6 +138,23 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     opacity: animationIn ? 1 : 0,
     child: box(),
   ));
+
+  Widget animatedBuilder() => container(
+    child: AnimatedBuilder(
+      animation: controller,
+      child: box(),
+      builder: (context, child) {
+        return Transform.rotate(
+          angle: controller.value * 0.6,
+          child: child,
+        );
+      }
+    ),
+  );
+
+  Widget animatedWidget() => container(
+    child: RotateTransition(child: box(), animation: controller)
+  );
 
   Widget scaleTransition() => container(child: ScaleTransition(
     scale: doubleAnimation,

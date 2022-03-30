@@ -1,8 +1,5 @@
 import 'dart:async';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-
 class DetailScreen extends StatefulWidget  {
   const DetailScreen({ Key? key }) : super(key: key);
 
@@ -69,7 +66,10 @@ class _DetailScreenState extends State<DetailScreen> with TickerProviderStateMix
             tag: 'hero-animation',
             child: Container(
               height: 300,
-              color: Colors.blueGrey[300]
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.all(100),
+              color: Colors.blueGrey[300],
+              child: const FlutterLogo(),
             ),
           ),
           const SizedBox(height: 10,),
